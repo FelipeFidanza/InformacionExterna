@@ -18,10 +18,10 @@ def Auctions():
             # Parseo el contenido HTML de la página
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # Busco los títulos
+            # Busco los autores
             authors_html = soup.find_all('h3', class_="chr-lot-tile__primary-title ellipsis--two-lines")
             
-            # Busco los autores
+            # Busco los titulos
             titles_html = soup.find_all('p', class_="chr-lot-tile__secondary-title ellipsis--one-line")
             
             # Busco los precios
