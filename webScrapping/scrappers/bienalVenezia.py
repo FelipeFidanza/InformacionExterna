@@ -11,7 +11,7 @@ def bienalVenezia():
     url = 'https://www.labiennale.org/en'
 
     try:
-        response = requests.get(url, timeout=30)
+        response = requests.get(url, timeout=40)
         response.raise_for_status()  # Verifica si hubo un error en la respuesta HTTP
 
         if response.status_code == 200: #Si puedo acceder a la página

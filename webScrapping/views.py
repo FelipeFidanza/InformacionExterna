@@ -1,4 +1,10 @@
 from django.shortcuts import render
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+
 from .models import *
 from rest_framework import viewsets, permissions
 from .serializers import *
@@ -20,3 +26,13 @@ class ArtistsViewSet(viewsets.ModelViewSet):
     queryset = Artists.objects.all()   # pylint: disable=no-member
     serializer_class = ArtistsSerializer
     permissions_classes = [permissions.AllowAny]
+
+
+
+
+
+
+@api_view(['GET'])
+def viewNews(request):
+
+    return Response({})
