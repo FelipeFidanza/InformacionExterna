@@ -37,7 +37,7 @@ def getNews():
     
     # Cargo las noticias a la base de datos
     for i, title in enumerate(newsTitles):
-        News.objects.create(
+        News.objects.create( #pylint: disable=no-member
             title=title,
             description=newsDescriptions[i],
             image=newsImages[i],

@@ -124,3 +124,43 @@ def artists():
     except requests.exceptions.RequestException:
         return {}
 
+
+
+
+import sys
+import os
+import django
+
+# Agrega el directorio raíz del proyecto al sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+# Establece el módulo de configuración de Django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'InfoExterna.settings')
+
+# Inicializa Django
+django.setup()
+
+
+from webScrapping.models import Artists
+
+def getArtists():
+
+    # Llamo a las funciones de las subastas
+    dicArtists = artists()
+
+    # Creo listas con la información de cada atributo de las subastas
+    artistsTitles = dicArtists["titles"]
+    artistsAbout = dicArtists["about"]
+    artistsDates = dicArtists["dates"]
+    artistsImages = dicArtists["images"]
+    artistsUrls = dicArtists["urls"]
+    
+    # Cargo las subastas a la base de datos
+    for i, title in enumerate(artistsTitles):
+        Artists.objects.create( #pylint: disable=no-member
+            title=title,
+            about=artistsAbout[i],
+            date=artistsDates[i],
+            image=artistsImages[i],
+            url=artistsUrls[i])
+        

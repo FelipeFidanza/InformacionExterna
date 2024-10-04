@@ -7,8 +7,8 @@ import re
 translator = Translator()
 
 #Página de subastas (Christies):
-def Auctions():
-    url = 'https://www.christies.com/en/browse?sortby=relevance'
+def auctions():
+    url = 'https://www.christies.com/en/browse?filterids=%7CCoaCategoryValues%7BAll%2Bother%2Bcategories%2Bof%2Bobjects%7D%7C&sortby=relevance'
 
     try:
         response = requests.get(url, timeout=30)
@@ -27,7 +27,7 @@ def Auctions():
             # Busco los precios
             text_html = str(soup)
             #patron = r'(USD|EUR)\s([\d,]+)\s-\s([\d,]+)'
-            patron = r'(USD|EUR)(\s[\d,]+\s-\s[\d,]+)'
+            patron = r'(USD|EUR|HKD)(\s[\d,]+\s-\s[\d,]+)'
             prices = re.findall(patron, text_html)
             
             # Busco las imagenes
@@ -112,3 +112,45 @@ def Auctions():
         return {}
     except requests.exceptions.RequestException:
         return {}
+    
+
+
+
+import sys
+import os
+import django
+
+# Agrega el directorio raíz del proyecto al sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+# Establece el módulo de configuración de Django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'InfoExterna.settings')
+
+# Inicializa Django
+django.setup()
+
+
+from webScrapping.models import Auctions
+
+def getAuctions():
+
+    # Llamo a las funciones de las subastas
+    dicAuctions = auctions()
+
+    # Creo listas con la información de cada atributo de las subastas
+    auctionsTitles = dicAuctions["titles"]
+    auctionsAuthors = dicAuctions["authors"]
+    auctionsPrices = dicAuctions["prices"]
+    auctionsImages = dicAuctions["images"]
+    auctionsUrls = dicAuctions["urls"]
+    
+    # Cargo las subastas a la base de datos
+    for i, title in enumerate(auctionsTitles):
+        Auctions.objects.create( #pylint: disable=no-member
+            title=title,
+            author=auctionsAuthors[i],
+            price=auctionsPrices[i],
+            image=auctionsImages[i],
+            url=auctionsUrls[i])
+
+
