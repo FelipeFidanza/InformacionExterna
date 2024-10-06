@@ -146,11 +146,14 @@ def getAuctions():
     
     # Cargo las subastas a la base de datos
     for i, title in enumerate(auctionsTitles):
-        Auctions.objects.create( #pylint: disable=no-member
-            title=title,
-            author=auctionsAuthors[i],
-            price=auctionsPrices[i],
-            image=auctionsImages[i],
-            url=auctionsUrls[i])
+        # Verifico que no esté cargada la subasta
+        if not Auctions.objects.filter(title=title, url=auctionsUrls[i]).exists(): # pylint: disable=no-member
+            # Si no está cargada, la agrego a la base de datos
+            Auctions.objects.create( #pylint: disable=no-member
+                title=title,
+                author=auctionsAuthors[i],
+                price=auctionsPrices[i],
+                image=auctionsImages[i],
+                url=auctionsUrls[i])
 
 

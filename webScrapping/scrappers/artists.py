@@ -157,10 +157,14 @@ def getArtists():
     
     # Cargo las subastas a la base de datos
     for i, title in enumerate(artistsTitles):
-        Artists.objects.create( #pylint: disable=no-member
-            title=title,
-            about=artistsAbout[i],
-            date=artistsDates[i],
-            image=artistsImages[i],
-            url=artistsUrls[i])
+        # Verifico que no esté cargada la noticia del artista
+        if not Artists.objects.filter(title=title, about=artistsAbout[i], date=artistsDates[i], #pylint: disable=no-member
+                                      image=artistsImages[i], url=artistsUrls[i]).exists():
+            # Si no está cargada, la agrego a la base de datos
+            Artists.objects.create( #pylint: disable=no-member
+                title=title,
+                about=artistsAbout[i],
+                date=artistsDates[i],
+                image=artistsImages[i],
+                url=artistsUrls[i])
         

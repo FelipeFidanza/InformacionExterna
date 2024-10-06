@@ -13,8 +13,8 @@ django.setup()
 
 
 from webScrapping.models import News
-from bienalVenezia import bienalVenezia # pylint: disable=import-error
-from infoDesigners import infoDesigners # pylint: disable=import-error
+from .bienalVenezia import bienalVenezia # pylint: disable=import-error
+from .infoDesigners import infoDesigners # pylint: disable=import-error
 
 
 def getNews():
@@ -37,8 +37,11 @@ def getNews():
     
     # Cargo las noticias a la base de datos
     for i, title in enumerate(newsTitles):
-        News.objects.create( #pylint: disable=no-member
-            title=title,
-            description=newsDescriptions[i],
-            image=newsImages[i],
-            url=newsUrls[i])
+        # Verifico si ya existe la noticia en cuestión
+        if not News.objects.filter(title=title, url=newsUrls[i]).exists():   # pylint: disable=no-member
+            # En caso de no existir, la agrego a la base de datos
+            News.objects.create( #pylint: disable=no-member
+                title=title,
+                description=newsDescriptions[i],
+                image=newsImages[i],
+                url=newsUrls[i])
