@@ -73,7 +73,7 @@ def auctions():
             #Imagenes
             images_html = images_html[:30]
             images_html = str(images_html)
-            pattern = r'http[s]?://www\.christies\.com/img/lotimages/[\w\(\)\.\?\=\-\/]+'
+            pattern = r'http[s]?://[\.\w]+christies\.com[\w\(\)\.\?\=\-\/\s]+'
             images = re.findall(pattern, images_html)
             # print("\nImagenes filtradas:")
             # for item in images:
@@ -83,7 +83,7 @@ def auctions():
             #Urls
             urls_html = urls_html[:30]
             urls_html = str(urls_html)
-            pattern = r'http[s]?://onlineonly\.christies\.com/[\w\?\=\.\&\;]+'
+            pattern = r'http[s]?://[\w\.\/]+christies\.com/[\w\?\=\.\-\/\&\;]+'
             urls = re.findall(pattern, urls_html)
             # print("\nUrls filtradas:")
             # for item in urls:
@@ -155,5 +155,3 @@ def getAuctions():
                 price=auctionsPrices[i],
                 image=auctionsImages[i],
                 url=auctionsUrls[i])
-
-
