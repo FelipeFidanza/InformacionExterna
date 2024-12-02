@@ -47,27 +47,27 @@ def auctions():
             for item in titles_html:
                 titles.append(item.text.strip())  # Agregar el texto del titulo a la lista
             titles = titles[:30]
-            # print("\nTítulos filtrados:")
-            # for item in titles:
-            #     print(item)
+            #print("\nTítulos filtrados:")
+            #for item in titles:
+            #    print(item)
 
 
             #Autores
             for item in authors_html:
                 authors.append(item.text.strip())  # Agregar el autor a la lista
             authors = authors[:30]
-            # print("\nAutores filtrados:")
-            # for item in authors:
-            #     print(item)
+            #print("\nAutores filtrados:")
+            #for item in authors:
+            #    print(item)
 
 
             #Precios
             prices = prices[:30]
             for i in range(30):
                 prices[i] = str(prices[i][0]) + str(prices[i][1])
-            # print("\nPrecios filtrados:")
-            # for item in prices:
-            #     print(item)
+            #print("\nPrecios filtrados:")
+            #for item in prices:
+            #    print(item)
             
 
             #Imagenes
@@ -75,9 +75,9 @@ def auctions():
             images_html = str(images_html)
             pattern = r'http[s]?://[\.\w]+christies\.com[\w\(\)\.\?\=\-\/\s]+'
             images = re.findall(pattern, images_html)
-            # print("\nImagenes filtradas:")
-            # for item in images:
-            #     print(item)
+            #print("\nImagenes filtradas:")
+            #for item in images:
+            #    print(item)
 
 
             #Urls
@@ -85,9 +85,9 @@ def auctions():
             urls_html = str(urls_html)
             pattern = r'http[s]?://[\w\.\/]+christies\.com/[\w\?\=\.\-\/\&\;]+'
             urls = re.findall(pattern, urls_html)
-            # print("\nUrls filtradas:")
-            # for item in urls:
-            #     print(item)
+            #print("\nUrls filtradas:")
+            #for item in urls:
+            #    print(item)
 
 
             #Devuelvo un diccionario (formato json)
@@ -129,6 +129,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'InfoExterna.settings')
 # Inicializa Django
 django.setup()
 
+
+#auctions()
 
 from webScrapping.models import Auctions
 

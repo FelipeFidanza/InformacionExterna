@@ -1,6 +1,9 @@
 import sys
 import os
 import django
+from webScrapping.models import News
+from .bienalVenezia import bienalVenezia
+from .infoDesigners import infoDesigners
 
 # Agrega el directorio raíz del proyecto al sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
@@ -10,11 +13,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'InfoExterna.settings')
 
 # Inicializa Django
 django.setup()
-
-
-from webScrapping.models import News
-from .bienalVenezia import bienalVenezia # pylint: disable=import-error
-from .infoDesigners import infoDesigners # pylint: disable=import-error
 
 
 def getNews():
@@ -45,3 +43,5 @@ def getNews():
                 description=newsDescriptions[i],
                 image=newsImages[i],
                 url=newsUrls[i])
+            
+getNews()

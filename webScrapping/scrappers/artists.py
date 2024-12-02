@@ -55,9 +55,9 @@ def artists():
                 name = part_1.split(', pronunciation=')[0] # Tomar la parte antes de ', pronunciation='
 
                 titles[i] = name
-            # print("\nTítulos filtrados:")
-            # for item in titles:
-            #     print(item)
+            #print("\nTítulos filtrados:")
+            #for item in titles:
+            #    print(item)
 
 
             #Acerca de
@@ -70,17 +70,17 @@ def artists():
                 name = part_1.split(', pronunciation=')[0] # Tomar la parte antes de ', pronunciation='
 
                 about[i] = name
-            # print("\nDescripciones filtradas:")
-            # for item in about:
-            #     print(item)
+            #print("\nDescripciones filtradas:")
+            #for item in about:
+            #    print(item)
 
 
             #Fechas
             for item in dates_html:
                 dates.append(item.text.strip())
-            # print("\nFechas filtradas:")
-            # for item in dates:
-            #     print(item)
+            #print("\nFechas filtradas:")
+            #for item in dates:
+            #    print(item)
 
 
             #Imágenes
@@ -88,17 +88,17 @@ def artists():
             pattern = r'https://www\.artnews\.com/wp-content/uploads/[\w\-\.\=\?\%\&\;\/\#\$\"\!]+'
             images = re.findall(pattern, str(images_html))
             images = images[::2]
-            # print("\nImagenes filtradas")
-            # for item in images:
-            #     print(item)
+            #print("\nImagenes filtradas")
+            #for item in images:
+            #    print(item)
 
 
             #Urls
             pattern = r'https://www\.artnews\.com/[\w\/\-\.\=\?\%\&\;\#\$\"\!]+'
             urls = re.findall(pattern, str(urls_html))
-            # print("\nUrls filtradas:")
-            # for item in urls:
-            #     print(item)
+            #print("\nUrls filtradas:")
+            #for item in urls:
+            #    print(item)
 
 
             #Devuelvo el json
@@ -111,7 +111,7 @@ def artists():
             }
 
         else:       #Si no puedo entrar a la página
-            return {}
+            print("No se pudo acceder")#return {}
         
     except requests.exceptions.ConnectionError:
         return {}
@@ -123,7 +123,6 @@ def artists():
         return {}
     except requests.exceptions.RequestException:
         return {}
-
 
 
 
@@ -140,21 +139,19 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'InfoExterna.settings')
 # Inicializa Django
 django.setup()
 
+#artists()
 
 from webScrapping.models import Artists
 
 def getArtists():
-
     # Llamo a las funciones de las subastas
     dicArtists = artists()
-
     # Creo listas con la información de cada atributo de las subastas
     artistsTitles = dicArtists["titles"]
     artistsAbout = dicArtists["about"]
     artistsDates = dicArtists["dates"]
     artistsImages = dicArtists["images"]
-    artistsUrls = dicArtists["urls"]
-    
+    artistsUrls = dicArtists["urls"]  
     # Cargo las subastas a la base de datos
     for i, title in enumerate(artistsTitles):
         # Verifico que no esté cargada la noticia del artista
@@ -168,3 +165,4 @@ def getArtists():
                 image=artistsImages[i],
                 url=artistsUrls[i])
         
+#getArtists()

@@ -8,4 +8,4 @@ python manage.py collectstatic --no-input
 python manage.py migrate
 
 # create superuser using environment variables
-python manage.py shell < create_superuser.py
+#python manage.py shell < create_superuser.py

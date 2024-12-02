@@ -48,9 +48,9 @@ def bienalVenezia():
 
                 titles[i] = name
             
-            # print("\nTítulos filtrados:")
-            # for item in titles:
-            #     print(item)
+            #print("\nTítulos filtrados:")
+            #for item in titles:
+            #    print(item)
 
 
             #Descripciones
@@ -66,18 +66,18 @@ def bienalVenezia():
 
                 descriptions[i] = name
 
-            # print("\nDescripciones filtradas: ")
-            # for item in descriptions:
-            #     print(item)
+            #print("\nDescripciones filtradas: ")
+            #for item in descriptions:
+            #    print(item)
 
 
             #Imagenes
             for item in images_html:
                 images.append(item['src'])  # Agregar la fuente de imagen a la lista
 
-            # print("\nImagenes filtradas:")
-            # for item in images:
-            #     print(item)
+            #print("\nImagenes filtradas:")
+            #for item in images:
+            #    print(item)
 
 
             #Urls
@@ -86,9 +86,9 @@ def bienalVenezia():
             for i in range(len(urls)):  #Agrego la ruta a cada url
                 urls[i] = "https://www.labiennale.org"+str(urls[i])
 
-            # print("\nUrls filtradas:")
-            # for item in urls:
-            #     print(item)
+            #print("\nUrls filtradas:")
+            #for item in urls:
+            #    print(item)
 
 
             #Creo el diccionario que va a devolver la función 
@@ -112,3 +112,6 @@ def bienalVenezia():
         return {}
     except requests.exceptions.RequestException:
         return {}
+
+
+#bienalVenezia()

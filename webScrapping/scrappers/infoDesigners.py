@@ -49,9 +49,9 @@ def infoDesigners():
 
                 titles[i] = name
 
-            # print("\nTítulos filtrados:")
-            # for item in titles:
-            #     print(item)
+            #print("\nTítulos filtrados:")
+            #for item in titles:
+            #    print(item)
 
             #Descripciones
             for item in descriptions_html:
@@ -64,9 +64,9 @@ def infoDesigners():
 
                 descriptions[i] = name
 
-            # print("\nDescripciones filtradas:")
-            # for item in descriptions:
-            #     print(item)
+            #print("\nDescripciones filtradas:")
+            #for item in descriptions:
+            #    print(item)
 
 
             #Imagenes
@@ -75,9 +75,9 @@ def infoDesigners():
             for i in range(len(images)):    # Agrego la ruta a cada imagen
                 images[i]= "https://www.infodesigners.eu"+str(images[i])
 
-            # print("\nImagenes filtradas:")
-            # for item in images:
-            #     print(item)
+            #print("\nImagenes filtradas:")
+            #for item in images:
+            #    print(item)
 
 
             #Urls
@@ -90,9 +90,9 @@ def infoDesigners():
             for i in range(len(urls)):  #Agrego la ruta a cada url
                 urls[i] = "https://www.infodesigners.eu/"+str(urls[i])
 
-            # print("\nUrls filtradas:")
-            # for item in urls:
-            #     print(item)
+            #print("\nUrls filtradas:")
+            #for item in urls:
+            #    print(item)
 
 
             #Devuelvo un diccionario (formato json)
@@ -116,3 +116,5 @@ def infoDesigners():
         return {}
     except requests.exceptions.RequestException:
         return {}
+    
+#infoDesigners()
