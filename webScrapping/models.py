@@ -9,8 +9,8 @@ class News(models.Model):
     url = models.CharField(max_length=400)
 
 class Auctions(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=100, blank=True, null=True)
+    title = models.CharField(max_length=500)
+    author = models.CharField(max_length=500, blank=True, null=True)
     price = models.CharField(max_length=50)
     image = models.CharField(max_length=400)
     url = models.CharField(max_length=400)

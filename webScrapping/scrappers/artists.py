@@ -164,5 +164,5 @@ def getArtists():
                 date=artistsDates[i],
                 image=artistsImages[i],
                 url=artistsUrls[i])
-        
+
 #getArtists()

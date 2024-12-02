@@ -157,3 +157,5 @@ def getAuctions():
                 price=auctionsPrices[i],
                 image=auctionsImages[i],
                 url=auctionsUrls[i])
+
+getAuctions()
